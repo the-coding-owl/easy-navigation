@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2017-05-14T12:26:00Z" product-name="easy_navigation">
+		<header/>
+		<body>
+            <!-- pages -->
+            <trans-unit id="pages.doktype.main_navigation" xml:space="preserve">
+                <source>Main navigation</source>
+            </trans-unit>
+            <trans-unit id="pages.doktype.meta_navigation" xml:space="preserve">
+                <source>Meta navigation</source>
+            </trans-unit>
+            <trans-unit id="pages.doktype.footer_navigation" xml:space="preserve">
+                <source>Footer navigation</source>
+            </trans-unit>
+		</body>
+	</file>
+</xliff>

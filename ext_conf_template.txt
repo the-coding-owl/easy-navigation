@@ -1,0 +1,6 @@
+# cat=basic/doktypes; type=int+; label=Doktype of the main navigation entry page
+mainNavigationDoktype = 124
+# cat=basic/doktypes; type=int+; label=Doktype of the meta navigation entry page
+metaNavigationDoktype = 125
+# cat=basic/doktypes; type=int+; label=Doktype of the footer navigation entry page
+footerNavigationDoktype = 126

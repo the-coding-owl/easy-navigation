@@ -1,0 +1,40 @@
+/*
+ *    Project:	easy_navigation
+ *    Version:	1.0.0
+ *    Date:		14.05.2017
+ *    Author:	Kevin Ditscheid <kevinditscheid@gmail.com>
+ *
+ *    Coded with Netbeans!
+ */
+
+plugin.tx_easynavigation.settings{
+	main{
+		# cat=tx_easynavigation/main/10; type=int+; label=The main navigations entry point
+		entry = 
+		# cat=tx_easynavigation/main/11; type=int+; label=The amount of levels the navigation goes
+		levels = 2
+		# cat=tx_easynavigation/main/12; type=string; label=A list of pages to exclude
+		excludeUidList =
+	}
+	meta{
+		# cat=tx_easynavigation/footer/20; type=int+; label=The meta navigations entry point
+		entry = 
+		# cat=tx_easynavigation/footer/21; type=int+; label=The amount of levels the navigation goes
+		levels = 1
+		# cat=tx_easynavigation/footer/22; type=string; label=A list of pages to exclude
+		excludeUidList =
+	}
+	footer{
+		# cat=tx_easynavigation/footer/30; type=int+; label=The footer navigations entry point
+		entry = 
+		# cat=tx_easynavigation/footer/31; type=int+; label=The amount of levels the navigation goes
+		levels = 1
+		# cat=tx_easynavigation/footer/32; type=string; label=A list of pages to exclude
+		excludeUidList =
+	}
+    breadcrumb{
+        # cat=tx_easynavigation/breadcrumb/42; type=string; label=A list of pages to exclude
+        excludeUidList =
+    }
+}
+

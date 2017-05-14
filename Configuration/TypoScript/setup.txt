@@ -1,0 +1,110 @@
+/*
+ *    Project:	easy_navigation
+ *    Version:	1.0.0
+ *    Date:		14.05.2017
+ *    Author:	Kevin Ditscheid <kevinditscheid@gmail.com>
+ *
+ *    Coded with Netbeans!
+ */
+
+plugin.tx_easynavigation{
+    navigation = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+    navigation {
+        special = directory
+        special{
+            value = 
+            value.ifEmpty.cObject = USER
+            value.ifEmpty.cObject{
+                userFunc = TheCodingOwl\EasyNavigation\UserFunc->findNavigationEntry
+                navigationType = 
+            }
+        }
+        as = navigation
+        levels = 1
+        excludeUidList = 
+        dataProcessing {
+            10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+            10 {
+                references.fieldName = media
+            }
+        }
+    }
+    main < .navigation
+    main{
+        special{
+            value = {$plugin.tx_easynavigation.settings.main.entry}
+            value.ifEmpty.cObject.navigationType = main
+        }
+        as = mainNavigation
+        levels = {$plugin.tx_easynavigation.settings.main.levels}
+        excludeUidList = {$plugin.tx_easynavigation.settings.main.excludeUidList}
+    }
+    meta < .navigation
+    meta{
+        special{
+            value = {$plugin.tx_easynavigation.settings.meta.entry}
+            value.ifEmpty.cObject.navigationType = meta
+        }
+        levels = {$plugin.tx_easynavigation.settings.meta.levels}
+        excludeUidList = {$plugin.tx_easynavigation.settings.meta.excludeUidList}
+        as = metaNavigation
+    }
+    footer < .navigation
+    footer{
+        special{
+            value = {$plugin.tx_easynavigation.settings.footer.entry}
+            value.ifEmpty.cObject.navigationType = footer
+        }
+        levels = {$plugin.tx_easynavigation.settings.footer.levels}
+        excludeUidList = {$plugin.tx_easynavigation.settings.footer.excludeUidList}
+        as = footerNavigation
+    }
+    language = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+    language{
+        special = language
+        special{
+            value.cObject = CONTENT
+            value.cObject{
+                table = sys_language
+                select{
+                    pidInList = root
+                    orderBy = uid
+                }
+                renderObj = TEXT
+                renderObj{
+                    value.field = uid
+                    wrap = |,
+                }
+                stdWrap{
+                    substring = 0,-1
+                }
+            }
+        }
+        as = languageNavigation
+        dataProcessing {
+            10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+            10 {
+                references.fieldName = media
+            }
+            20 = TYPO3\CMS\Frontend\DataProcessing\DatabaseQueryProcessor
+            20{
+                table = sys_language
+                pidInList = root
+                as = sysLanguages
+            }
+        }
+    }
+    breadcrumb = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+    breadcrumb{
+        special = rootline
+        special.range = 0|-1
+        as = breadcrumbNavigation
+        excludeUidList = {$plugin.tx_easynavigation.settings.breadcrumb.excludeUidList}
+        dataProcessing {
+            10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
+            10 {
+                references.fieldName = media
+            }
+        }
+    }
+}
