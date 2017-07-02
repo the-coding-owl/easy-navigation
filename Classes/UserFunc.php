@@ -49,7 +49,7 @@ class UserFunc {
         $queryBuilder->createNamedParameter($doktype, \PDO::PARAM_INT, ':doktype');
         $rootLine = $this->getTypoScriptFrontendController()->rootLine;
         $placeholders = [];
-        array_walk($rootLine, function($row) use ($queryBuilder,$placeholders){
+        array_walk($rootLine, function($row) use ($queryBuilder,&$placeholders){
             $placeholders[] = $queryBuilder->createNamedParameter($row['uid'], \PDO::PARAM_INT);
         });
         if( count($placeholders) > 0 ){
