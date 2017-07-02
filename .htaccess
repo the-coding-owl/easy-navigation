@@ -3,7 +3,7 @@
 	Order allow,deny
 	Deny from all
 	<Files ext_icon.*>
-		Order Allow, Deny
+		Order Allow,Deny
 		Allow from All
 	</Files>
 </IfModule>
