@@ -13,33 +13,34 @@
  * The TYPO3 project - inspiring people to share!
  */
 
-defined('TYPO3_MODE') or die();
-
 call_user_func(function ($extKey) {
-    $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$extKey]);
-    foreach( [ 'footer', 'meta', 'main' ] as $navigationType ){
-        $newDoktype = $extConf[$navigationType . 'NavigationDoktype'];
-        if( empty($newDoktype) ){
-            if( $navigationType === 'main' ){
-                $newDoktype = 124;
-            } elseif( $navigationType === 'meta' ) {
-                $newDoktype = 125;
-            } elseif( $navigationType === 'footer' ) {
-                $newDoktype = 126;
-            }
-        }
+	if (version_compare(\TYPO3\CMS\Core\Utility\VersionNumberUtility::getCurrentTypo3Version(), '9.0.0', '<')) {
+		$extensionUtility = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TheCodingOwl\EasyNavigation\ExtensionUtility::class);
+		$extConf = $extensionUtility->getExtensionConfiguration();
+		foreach (['footer', 'meta', 'main'] as $navigationType) {
+			$newDoktype = $extConf[$navigationType . 'NavigationDoktype'];
+			if (empty($newDoktype)) {
+				if ($navigationType === 'main') {
+					$newDoktype = 124;
+				} elseif ($navigationType === 'meta') {
+					$newDoktype = 125;
+				} elseif ($navigationType === 'footer') {
+					$newDoktype = 126;
+				}
+			}
 
-        // Add new page type as possible select item:
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
-            'pages_language_overlay',
-            'doktype',
-            [
-                'LLL:EXT:easy_navigation/Resources/Private/Language/locallang_db.xlf:pages.doktype.' . $navigationType . '_navigation',
-                $newDoktype,
-                'actions-menu'
-            ],
-            '199',
-            'after'
-        );
-    }
+			// Add new page type as possible select item:
+			\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
+				'pages_language_overlay',
+				'doktype',
+				[
+					'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang_db.xlf:pages.doktype.' . $navigationType . '_navigation',
+					$newDoktype,
+					'actions-menu'
+				],
+				'199',
+				'after'
+			);
+		}
+	}
 }, 'easy_navigation');

@@ -1,12 +1,3 @@
-/*
- *    Project:	easy_navigation
- *    Version:	1.0.0
- *    Date:		14.05.2017
- *    Author:	Kevin Ditscheid <kevinditscheid@gmail.com>
- *
- *    Coded with Netbeans!
- */
-
 plugin.tx_easynavigation{
     navigation = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
     navigation {

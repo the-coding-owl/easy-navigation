@@ -16,6 +16,7 @@
 call_user_func(function ($extKey) {
 	$extensionUtility = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TheCodingOwl\EasyNavigation\ExtensionUtility::class);
 	$extConf = $extensionUtility->getExtensionConfiguration();
+	$navigationConstants = 'plugin.tx_easynavigation.settings{' . PHP_EOL;
 	foreach (['footer', 'meta', 'main'] as $navigationType) {
 		$newDoktype = $extConf[$navigationType . 'NavigationDoktype'];
 
@@ -28,40 +29,14 @@ call_user_func(function ($extKey) {
 				$newDoktype = 126;
 			}
 		}
-		// Add new page type:
-		$GLOBALS['PAGES_TYPES'][$newDoktype] = [
-			'type' => 'web',
-			'allowedTables' => '*',
-		];
+		// add the doktypes to the TypoScript constant section of the template to be able to use them in the TypoScript templates
+		$navigationConstants .= $navigationType . '.doktype=' . $newDoktype . PHP_EOL;
 
-		// Add new page type as possible select item:
-		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
-			'pages',
-			'doktype',
-			[
-				'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang_db.xlf:pages.doktype.' . $navigationType . '_navigation',
-				$newDoktype,
-				'actions-menu'
-			],
-			'199',
-			'after'
-		);
-
-		// Add icon for new page type:
-		\TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
-			$GLOBALS['TCA']['pages'],
-			[
-				'ctrl' => [
-					'typeicon_classes' => [
-						$newDoktype => 'actions-menu',
-					],
-				],
-				'types' => [
-					$newDoktype => [
-						'showitem' => $GLOBALS['TCA']['pages']['types'][254]['showitem']
-					]
-				]
-			]
+		// Allow backend users to drag and drop the new page type:
+		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addUserTSConfig(
+			'options.pageTree.doktypesToShowInNewPageDragArea := addToList(' . $newDoktype . ')'
 		);
 	}
+	$navigationConstants .= '}' . PHP_EOL;
+	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptConstants($navigationConstants);
 }, 'easy_navigation');
