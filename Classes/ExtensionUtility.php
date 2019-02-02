@@ -40,6 +40,6 @@ class ExtensionUtility implements SingletonInterface
 				['allowed_classes' => false]
 			);
 		}
-		return $extensionConfiguration;
+		return is_array($extensionConfiguration) ? $extensionConfiguration : [];
 	}
 }
