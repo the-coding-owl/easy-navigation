@@ -37,7 +37,7 @@ class ExtensionUtility implements SingletonInterface
 		} else {
 			$extensionConfiguration = unserialize(
 				$GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['easy_navigation'],
-				false
+				['allowed_classes' => false]
 			);
 		}
 		return $extensionConfiguration;
