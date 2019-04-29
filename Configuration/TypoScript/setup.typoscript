@@ -54,20 +54,25 @@ plugin.tx_easynavigation{
     language{
         special = language
         special{
-            value.cObject = CONTENT
+            value.cObject = COA
             value.cObject{
-                table = sys_language
-                select{
-                    pidInList = root
-                    orderBy = uid
-                }
-                renderObj = TEXT
-                renderObj{
-                    value.field = uid
-                    wrap = |,
-                }
-                stdWrap{
-                    substring = 0,-1
+                10 = TEXT
+                10.value = 0,
+                20 = CONTENT
+                20{
+                    table = sys_language
+                    select{
+                        pidInList = root
+                        orderBy = uid
+                    }
+                    renderObj = TEXT
+                    renderObj{
+                        value.field = uid
+                        wrap = |,
+                    }
+                    stdWrap{
+                        substring = 0,-1
+                    }
                 }
             }
         }
