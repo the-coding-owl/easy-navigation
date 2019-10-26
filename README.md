@@ -9,7 +9,7 @@ composer require the-coding-owl/easy-navigation
 ```
 to integrate this package into your project.
 
-Since my prefered way of setting up TYPO3 instances these days is by using composer, I will not provide a TYPO3 Extension Repository package in TER. Anyway you can still simply insert the contents of this repository into the `typo3conf/ext/easy_navigation` folder and install it via the Extension Manager the old way.
+Since version 1.1.2 this extension is also available on https://extensions.typo3.org and can be downloaded from the TER or from the TYPO3 backend.
 
 ## Requirements
 ```
