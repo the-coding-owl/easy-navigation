@@ -31,12 +31,11 @@ $EM_CONF[$_EXTKEY] = array(
 	'version' => '1.1.2',
 	'constraints' => array(
 		'depends' => array(
-			'typo3' => '8.7.0-9.5.99'
+			'typo3' => '8.7.0-10.1.99'
 		),
 		'conflicts' => array(
 		),
 		'suggests' => array(
-			'realurl' => '2.2.1'
 		)
 	)
 );

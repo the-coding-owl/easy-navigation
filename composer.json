@@ -1,28 +1,28 @@
 {
-  "name": "the-coding-owl/easy-navigation",
-  "description": "An extension that makes it easy to flag a TYPO3 page record as an entry point of a menu",
-  "type": "typo3-cms-extension",
-  "require": {
-    "typo3/cms-core": "^8.7.22 || ^9.5.2",
-    "typo3/cms-backend": "^8.7.22 || ^9.5.2",
-    "typo3/cms-frontend": "^8.7.22 || ^9.5.2",
-    "typo3/cms-fluid": "^8.7.22 || ^9.5.2",
-    "typo3/cms-fluid-styled-content": "^8.7.22 || ^9.5.2"
-  },
-  "license": "GPL-3.0-or-later",
-  "authors": [
-    {
-      "name": "Kevin Ditscheid",
-      "email": "kevin@the-coding-owl.de"
+    "name": "the-coding-owl/easy-navigation",
+    "description": "An extension that makes it easy to flag a TYPO3 page record as an entry point of a menu",
+    "type": "typo3-cms-extension",
+    "require": {
+        "typo3/cms-core": "^8.7.22 || ^9.5.2 || ^10.1.0",
+        "typo3/cms-backend": "^8.7.22 || ^9.5.2 || ^10.1.0",
+        "typo3/cms-frontend": "^8.7.22 || ^9.5.2 || ^10.1.0",
+        "typo3/cms-fluid": "^8.7.22 || ^9.5.2 || ^10.1.0",
+        "typo3/cms-fluid-styled-content": "^8.7.22 || ^9.5.2 || ^10.1.0"
+    },
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Kevin Ditscheid",
+            "email": "kevin@the-coding-owl.de"
+        }
+    ],
+  	"replace": {
+    		"easy_navigation": "self.version",
+    		"typo3-ter/easy-navigation": "self.version"
+  	},
+    "autoload": {
+        "psr-4": {
+            "TheCodingOwl\\EasyNavigation\\": "Classes/"
+        }
     }
-  ],
-  "replace": {
-    "easy_navigation": "self.version",
-    "typo3-ter/easy-navigation": "self.version"
-  },
-  "autoload": {
-    "psr-4": {
-      "TheCodingOwl\\EasyNavigation\\": "Classes/"
-    }
-  }
 }
