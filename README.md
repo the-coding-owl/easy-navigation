@@ -14,7 +14,7 @@ Since version 1.1.2 this extension is also available on https://extensions.typo3
 ## Requirements
 ```
 PHP7.1
-TYPO3 8.7
+TYPO3 9.5
 ```
 ## Usage
 Once installed, you need to add the static TypoScript template of the extension to your template. It provides you with 5 different DataProcessor configurations for Main-, Meta-, Footer-, Language- and Breadcrumbnavigation. You can use these Dataprocessors by adding them to your `FLUIDTEMPLATE` like this:
@@ -54,7 +54,7 @@ As an example you can build up your main navigation like this:
   </ul>
 </nav>
 ```
-To determine where the main navigation begins, you need to add a page-record of type `Main Navigation` into your pagetree and build up your menu as sub-pages of this page. You can add as many pages as you like. The default level of depth for the main navigation is 2, for every other navigation 1. You can change the depth by changing the TypoScript constant `plugin.tx_easynavigation.settings.main.levels`, have a look into the `constants.txt` for more information on how to configure the navigation menus.
+To determine where the main navigation begins, you need to add a page-record of type `Main Navigation` into your pagetree and build up your menu as sub-pages of this page. You can add as many pages as you like. The default level of depth for the main navigation is 2, for every other navigation 1. You can change the depth by changing the TypoScript constant `plugin.tx_easynavigation.settings.main.levels`, have a look into the `constants.typoscript` for more information on how to configure the navigation menus.
 The breadcrumb navigation generates a trail of links of the pages that are located up in the pagetree as a sort of "back navigation". It can only be configured to exclude certain pages from being included in the navigation.
 The language navigation is generated from the `sys_language`-records, located on the root page of the TYPO3 instance (pid 0). It takes the records and generates links to the current page in the fitting language. A fluid template of this navigation could look like this:
 ```
@@ -77,8 +77,8 @@ The language navigation is generated from the `sys_language`-records, located on
   </ul>
 </nav>
 ```
-For further information you can take a look into the `setup.txt` where the navigation configurations take place. There is as little PHP code as possible used to generate those navigations to have them very flexible and adaptable. You can change the TypoScript part of the navigation generation at every time.
+For further information you can take a look into the `setup.typoscript` where the navigation configurations take place. There is as little PHP code as possible used to generate those navigations to have them very flexible and adaptable. You can change the TypoScript part of the navigation generation at every time.
 
 Feel free to use this extension but be aware that there is no guarantee that it will work out in every possible environment.
-
+# Issues
 I highly appreciate it, if you find bugs, have feature request or other ideas regarding this piece of software. Please open an issue ticket here on github if you want to participate.
