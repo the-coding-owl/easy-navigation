@@ -23,6 +23,7 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 
 /**
  * This class carries all userfunctions that can not be associated with a certain part of the system
@@ -42,8 +43,7 @@ class UserFunc
 	public function findNavigationEntry(string $content, array $configuration): string
 	{
 		$navigationType = $configuration['navigationType'];
-		$extensionUtility = GeneralUtility::makeInstance(ExtensionUtility::class);
-		$extConf = $extensionUtility->getExtensionConfiguration();
+        $extConf = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('easy_navigation');
 		$doktype = $extConf[$navigationType . 'NavigationDoktype'];
 		if (empty($doktype)) {
 			if ($navigationType === 'main') {
