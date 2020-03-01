@@ -1,0 +1,69 @@
+#<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+	<f:section name="main">
+		<f:if condition="{menu}">
+			<nav class="page-navigation-main">
+				<f:render partial="Navigation" section="general" arguments="{menu: menu}" />
+			</nav>
+		</f:if>
+	</f:section>
+
+    <f:section name="language">
+        <nav class="page-navigation-language">
+            <ul class="navigation">
+                <f:for each="{languageNavigation}" as="language">
+                    <f:for each="{language.sysLanguages}" as="sysLanguage">
+                        <f:if condition="{language.languageUid}=={sysLanguage.data.uid}">
+                            <li class="item language-{sysLanguage.data.language_isocode}{f:if(condition:'{language.active}',then:' active')}">
+                                <a href="{page.link}" target="{page.target}" title="{sysLanguage.data.title}">
+                                    <span class="flag-{sysLanguage.data.flag}">
+                                        <f:render partial="Navigation" section="languageFlag" arguments="{flag: sysLanguage.data.flag, flagWidth: 50}" />
+                                    </span>
+                                    <span>{sysLanguage.data.title}</span>
+                                </a>
+                            </li>
+                        </f:if>
+                    </f:for>
+                </f:for>
+            </ul>
+        </nav>
+    </f:section>
+
+    <f:section name="languageFlag">
+        <f:switch expression="{flag}">
+            <f:case value="en-us-gb">
+                <img src="{f:uri.resource(path:'Icons/Flags/en_us-gb.png',extensionName:'core')}" width="{flagWidth}" />
+            </f:case>
+            <f:defaultCase>
+                <img src="{f:uri.resource(path:'Icons/Flags/PNG/{flag -> f:format.case()}.png',extensionName:'core')}" width="{flagWidth}" />
+            </f:defaultCase>
+        </f:switch>
+    </f:section>
+
+    <f:section name="meta">
+        <f:if condition="{menu}">
+            <nav class="page-navigation-meta">
+                <f:render partial="Navigation" section="general" arguments="{menu: menu}" />
+            </nav>
+        </f:if>
+    </f:section>
+
+	<f:section name="footer">
+		<f:if condition="{menu}">
+			<nav class="page-navigation-footer">
+                <f:render partial="Navigation" section="general" arguments="{menu: menu}" />
+			</nav>
+		</f:if>
+	</f:section>
+
+    <f:section name="general">
+        <ul class="navigation">
+            <f:for each="{menu}" as="page">
+                <li class="item{f:if(condition:'{page.active}',then:' active')}{f:if(condition:'{page.current}',then:' current')}{f:if(condition:'{page.class}',then:' {page.class}')}">
+                    <a href="{page.link}" target="{page.target}" title="{page.title}">
+                        <span>{page.title}</span>
+                    </a>
+                </li>
+            </f:for>
+        </ul>
+    </f:section>
+</html>

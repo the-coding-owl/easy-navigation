@@ -1,18 +1,18 @@
-plugin.tx_easynavigation{
+plugin.tx_easynavigation {
     navigation = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
     navigation {
         special = directory
         special{
-            value = 
+            value =
             value.ifEmpty.cObject = USER
             value.ifEmpty.cObject{
                 userFunc = TheCodingOwl\EasyNavigation\UserFunc->findNavigationEntry
-                navigationType = 
+                navigationType =
             }
         }
         as = navigation
         levels = 1
-        excludeUidList = 
+        excludeUidList =
         dataProcessing {
             10 = TYPO3\CMS\Frontend\DataProcessing\FilesProcessor
             10 {

@@ -77,6 +77,17 @@ The language navigation is generated from the `sys_language`-records, located on
   </ul>
 </nav>
 ```
+There is a default navigation partial that can easily be used in a site template by adding the provided constant to the site partials. Just add it to your PAGE configuration like this:
+```
+page = PAGE
+page.10 = FLUIDTEMPLATE
+page.10 {
+    partialRootPaths {
+        10 = {$plugin.tx_easynavigation.view.partialRootPath}
+    }
+    ...
+}
+```
 For further information you can take a look into the `setup.typoscript` where the navigation configurations take place. There is as little PHP code as possible used to generate those navigations to have them very flexible and adaptable. You can change the TypoScript part of the navigation generation at every time.
 
 Feel free to use this extension but be aware that there is no guarantee that it will work out in every possible environment.
