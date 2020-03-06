@@ -18,8 +18,9 @@
  */
 
 call_user_func(function ($extKey) {
-	$extensionUtility = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TheCodingOwl\EasyNavigation\ExtensionUtility::class);
-	$extConf = $extensionUtility->getExtensionConfiguration();
+    $extConf = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+        \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
+    )->get('easy_navigation');
 	$navigationConstants = 'plugin.tx_easynavigation.settings{' . PHP_EOL;
 	foreach (['footer', 'meta', 'main'] as $navigationType) {
 		$newDoktype = $extConf[$navigationType . 'NavigationDoktype'];

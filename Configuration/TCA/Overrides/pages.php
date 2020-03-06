@@ -18,7 +18,9 @@
  */
 
 call_user_func(function ($extKey) {
-	$extConf = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('easy_navigation');
+	$extConf = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+        \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
+    )->get('easy_navigation');
 	foreach (['footer', 'meta', 'main'] as $navigationType) {
 		$newDoktype = $extConf[$navigationType . 'NavigationDoktype'];
 
