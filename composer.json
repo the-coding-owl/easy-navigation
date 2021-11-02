@@ -3,19 +3,24 @@
     "description": "An extension that makes it easy to flag a TYPO3 page record as an entry point of a menu",
     "type": "typo3-cms-extension",
     "require": {
-        "typo3/cms-core": "^9.5.14 || ^10.3.0",
-        "typo3/cms-backend": "^9.5.14 || ^10.3.0",
-        "typo3/cms-frontend": "^9.5.14 || ^10.3.0",
-        "typo3/cms-fluid": "^9.5.14 || ^10.3.0",
-        "typo3/cms-fluid-styled-content": "^9.5.14 || ^10.3.0"
+        "typo3/cms-core": "^9.5.14 || ^10.3.0 || ^11.5.0",
+        "typo3/cms-backend": "^9.5.14 || ^10.3.0 || ^11.5.0",
+        "typo3/cms-frontend": "^9.5.14 || ^10.3.0 || ^11.5.0",
+        "typo3/cms-fluid": "^9.5.14 || ^10.3.0 || ^11.5.0",
+        "typo3/cms-fluid-styled-content": "^9.5.14 || ^10.3.0 || ^11.5.0"
     },
     "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "Kevin Ditscheid",
-            "email": "kevin@the-coding-owl.de"
+            "email": "kevin@the-coding-owl.de",
+            "role": "Owner"
         }
     ],
+    "support": {
+        "issues": "https://github.com/the-coding-owl/easy-navigation/issues",
+        "source": "https://github.com/the-coding-owl/easy-navigation"
+    },
   	"replace": {
     		"typo3-ter/easy-navigation": "self.version"
   	},
@@ -23,5 +28,13 @@
         "psr-4": {
             "TheCodingOwl\\EasyNavigation\\": "Classes/"
         }
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.0.1",
+        "saschaegerer/phpstan-typo3": "^1.0.0",
+        "phpstan/extension-installer": "^1.1.0",
+        "squizlabs/php_codesniffer": "^3.6.1",
+        "roave/security-advisories": "dev-master",
+        "friendsofphp/php-cs-fixer": "^3.2"
     }
 }
