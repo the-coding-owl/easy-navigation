@@ -18,55 +18,55 @@
  */
 
 call_user_func(function ($extKey) {
-	$extConf = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+    $extConf = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
         \TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
     )->get('easy_navigation');
-	foreach (['footer', 'meta', 'main'] as $navigationType) {
-		$newDoktype = $extConf[$navigationType . 'NavigationDoktype'];
+    foreach (['footer', 'meta', 'main'] as $navigationType) {
+        $newDoktype = $extConf[$navigationType . 'NavigationDoktype'];
 
-		if (empty($newDoktype)) {
-			if ($navigationType === 'main') {
-				$newDoktype = 124;
-			} elseif ($navigationType === 'meta') {
-				$newDoktype = 125;
-			} elseif ($navigationType === 'footer') {
-				$newDoktype = 126;
-			}
-		}
-		// Add new page type:
-		$GLOBALS['PAGES_TYPES'][$newDoktype] = [
-			'type' => 'web',
-			'allowedTables' => '*',
-		];
+        if (empty($newDoktype)) {
+            if ($navigationType === 'main') {
+                $newDoktype = 124;
+            } elseif ($navigationType === 'meta') {
+                $newDoktype = 125;
+            } elseif ($navigationType === 'footer') {
+                $newDoktype = 126;
+            }
+        }
+        // Add new page type:
+        $GLOBALS['PAGES_TYPES'][$newDoktype] = [
+            'type' => 'web',
+            'allowedTables' => '*',
+        ];
 
-		// Add new page type as possible select item:
-		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
-			'pages',
-			'doktype',
-			[
-				'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang_db.xlf:pages.doktype.' . $navigationType . '_navigation',
-				$newDoktype,
-				'actions-menu'
-			],
-			'199',
-			'after'
-		);
+        // Add new page type as possible select item:
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItem(
+            'pages',
+            'doktype',
+            [
+                'LLL:EXT:' . $extKey . '/Resources/Private/Language/locallang_db.xlf:pages.doktype.' . $navigationType . '_navigation',
+                $newDoktype,
+                'actions-menu'
+            ],
+            '199',
+            'after'
+        );
 
-		// Add icon for new page type:
-		\TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
-			$GLOBALS['TCA']['pages'],
-			[
-				'ctrl' => [
-					'typeicon_classes' => [
-						$newDoktype => 'actions-menu',
-					],
-				],
-				'types' => [
-					$newDoktype => [
-						'showitem' => $GLOBALS['TCA']['pages']['types'][254]['showitem']
-					]
-				]
-			]
-		);
-	}
+        // Add icon for new page type:
+        \TYPO3\CMS\Core\Utility\ArrayUtility::mergeRecursiveWithOverrule(
+            $GLOBALS['TCA']['pages'],
+            [
+                'ctrl' => [
+                    'typeicon_classes' => [
+                        $newDoktype => 'actions-menu',
+                    ],
+                ],
+                'types' => [
+                    $newDoktype => [
+                        'showitem' => $GLOBALS['TCA']['pages']['types'][254]['showitem']
+                    ]
+                ]
+            ]
+        );
+    }
 }, 'easy_navigation');

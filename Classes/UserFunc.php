@@ -32,64 +32,64 @@ use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
  */
 class UserFunc
 {
-	/**
-	 * Find a navigation entry in the rootline of the current page
-	 *
-	 * @param string $content A prerendered content, not used here
-	 * @param array $configuration The array of TypoScript configuration for the UserFunction
-	 *
-	 * @return string
-	 */
-	public function findNavigationEntry(string $content, array $configuration): string
-	{
-		$navigationType = $configuration['navigationType'];
+    /**
+     * Find a navigation entry in the rootline of the current page
+     *
+     * @param string $content A prerendered content, not used here
+     * @param array $configuration The array of TypoScript configuration for the UserFunction
+     *
+     * @return string
+     */
+    public function findNavigationEntry(string $content, array $configuration): string
+    {
+        $navigationType = $configuration['navigationType'];
         $extConf = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('easy_navigation');
-		$doktype = $extConf[$navigationType . 'NavigationDoktype'];
-		if (empty($doktype)) {
-			if ($navigationType === 'main') {
-				$doktype = 124;
-			} elseif ($navigationType === 'meta') {
-				$doktype = 125;
-			} elseif ($navigationType === 'footer') {
-				$doktype = 126;
-			}
-		}
-		$queryBuilder = $this->getPagesQueryBuilder();
-		$queryBuilder->select('uid');
-		$queryBuilder->from('pages');
-		$queryBuilder->where('doktype=:doktype');
-		$queryBuilder->createNamedParameter($doktype, \PDO::PARAM_INT, ':doktype');
-		$rootLine = $this->getTypoScriptFrontendController()->rootLine;
-		$placeholders = [];
-		if (is_array($rootLine)) {
-			array_walk($rootLine, function ($row) use ($queryBuilder, &$placeholders) {
-				$placeholders[] = $queryBuilder->createNamedParameter($row['uid'], \PDO::PARAM_INT);
-			});
-		}
-		if (count($placeholders) > 0) {
-			$queryBuilder->andWhere('pid IN(' . implode(',', $placeholders) . ')');
-		}
-		$row = $queryBuilder->execute()->fetch();
-		return $row['uid'] ?? '';
-	}
+        $doktype = $extConf[$navigationType . 'NavigationDoktype'];
+        if (empty($doktype)) {
+            if ($navigationType === 'main') {
+                $doktype = 124;
+            } elseif ($navigationType === 'meta') {
+                $doktype = 125;
+            } elseif ($navigationType === 'footer') {
+                $doktype = 126;
+            }
+        }
+        $queryBuilder = $this->getPagesQueryBuilder();
+        $queryBuilder->select('uid');
+        $queryBuilder->from('pages');
+        $queryBuilder->where('doktype=:doktype');
+        $queryBuilder->createNamedParameter($doktype, \PDO::PARAM_INT, ':doktype');
+        $rootLine = $this->getTypoScriptFrontendController()->rootLine;
+        $placeholders = [];
+        if (is_array($rootLine)) {
+            array_walk($rootLine, function ($row) use ($queryBuilder, &$placeholders) {
+                $placeholders[] = $queryBuilder->createNamedParameter($row['uid'], \PDO::PARAM_INT);
+            });
+        }
+        if (count($placeholders) > 0) {
+            $queryBuilder->andWhere('pid IN(' . implode(',', $placeholders) . ')');
+        }
+        $row = $queryBuilder->execute()->fetch();
+        return $row['uid'] ?? '';
+    }
 
-	/**
-	 * Get the TypoScriptFrontendController aka TSFE
-	 * @return TypoScriptFrontendController
-	 */
-	protected function getTypoScriptFrontendController(): TypoScriptFrontendController
-	{
-		return $GLOBALS['TSFE'];
-	}
+    /**
+     * Get the TypoScriptFrontendController aka TSFE
+     * @return TypoScriptFrontendController
+     */
+    protected function getTypoScriptFrontendController(): TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
+    }
 
-	/**
-	 * Get the query builder for the pages-table
-	 *
-	 * @return QueryBuilder
-	 */
-	protected function getPagesQueryBuilder(): QueryBuilder
-	{
-		$db = GeneralUtility::makeInstance(ConnectionPool::class);
-		return $db->getQueryBuilderForTable('pages');
-	}
+    /**
+     * Get the query builder for the pages-table
+     *
+     * @return QueryBuilder
+     */
+    protected function getPagesQueryBuilder(): QueryBuilder
+    {
+        $db = GeneralUtility::makeInstance(ConnectionPool::class);
+        return $db->getQueryBuilderForTable('pages');
+    }
 }

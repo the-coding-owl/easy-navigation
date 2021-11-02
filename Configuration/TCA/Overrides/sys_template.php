@@ -18,6 +18,9 @@
  */
 
 call_user_func(function ($extKey) {
-	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($extKey, 'Configuration/TypoScript',
-		'Navigation Template');
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+        $extKey,
+        'Configuration/TypoScript',
+        'Navigation Template'
+    );
 }, 'easy_navigation');
