@@ -24,6 +24,7 @@ use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use Doctrine\DBAL\Driver\Result;
 
 /**
  * This class carries all userfunctions that can not be associated with a certain part of the system
@@ -36,7 +37,7 @@ class UserFunc
      * Find a navigation entry in the rootline of the current page
      *
      * @param string $content A prerendered content, not used here
-     * @param array $configuration The array of TypoScript configuration for the UserFunction
+     * @param String[] $configuration The array of TypoScript configuration for the UserFunction
      *
      * @return string
      */
@@ -44,8 +45,8 @@ class UserFunc
     {
         $navigationType = $configuration['navigationType'];
         $extConf = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('easy_navigation');
-        $doktype = $extConf[$navigationType . 'NavigationDoktype'];
-        if (empty($doktype)) {
+        $doktype = is_array($extConf) ? $extConf[$navigationType . 'NavigationDoktype'] : 0;
+        if ($doktype === 0) {
             if ($navigationType === 'main') {
                 $doktype = 124;
             } elseif ($navigationType === 'meta') {
@@ -69,8 +70,11 @@ class UserFunc
         if (count($placeholders) > 0) {
             $queryBuilder->andWhere('pid IN(' . implode(',', $placeholders) . ')');
         }
-        $row = $queryBuilder->execute()->fetch();
-        return $row['uid'] ?? '';
+        /** @var Result $result */
+        $result = $queryBuilder->execute();
+        /** @var string[]|bool $row */
+        $row = $result->fetchAssociative();
+        return is_array($row) ? (string) $row['uid'] : '';
     }
 
     /**
