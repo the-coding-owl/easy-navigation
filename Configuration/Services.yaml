@@ -1,8 +1,8 @@
-﻿services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-        public: false
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
 
-    TheCodingOwl\EasyNavigation\:
-        resource: '../Classes/*'
+  TheCodingOwl\EasyNavigation\:
+    resource: '../Classes/*'
