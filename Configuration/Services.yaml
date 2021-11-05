@@ -1,8 +1,8 @@
-services:
+﻿services:
     _defaults:
         autowire: true
         autoconfigure: true
         public: false
 
-    TheCodingOwl\EasyNavigation:
+    TheCodingOwl\EasyNavigation\:
         resource: '../Classes/*'
