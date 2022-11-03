@@ -9,20 +9,17 @@
 
     <f:section name="language">
         <nav class="page-navigation-language">
+            <f:debug>{languageNavigation}</f:debug>
             <ul class="navigation">
                 <f:for each="{languageNavigation}" as="language">
-                    <f:for each="{language.sysLanguages}" as="sysLanguage">
-                        <f:if condition="{language.languageUid}=={sysLanguage.data.uid}">
-                            <li class="item language-{sysLanguage.data.language_isocode}{f:if(condition:'{language.active}',then:' active')}">
-                                <a href="{page.link}" target="{page.target}" title="{sysLanguage.data.title}">
-                                    <span class="flag-{sysLanguage.data.flag}">
-                                        <f:render partial="Navigation" section="languageFlag" arguments="{flag: sysLanguage.data.flag, flagWidth: 50}" />
-                                    </span>
-                                    <span>{sysLanguage.data.title}</span>
-                                </a>
-                            </li>
-                        </f:if>
-                    </f:for>
+                    <li class="item language-{language.twoLetterIsoCode}{f:if(condition:'{language.active}',then:' active')}">
+                        <a href="{language.link}" title="{language.title}">
+                            <span class="flag-{language.flag}">
+                                <f:render partial="Navigation" section="languageFlag" arguments="{flag: language.flag, flagWidth: 50}" />
+                            </span>
+                            <span>{language.title}</span>
+                        </a>
+                    </li>
                 </f:for>
             </ul>
         </nav>
