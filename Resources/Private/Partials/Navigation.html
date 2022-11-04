@@ -9,7 +9,6 @@
 
     <f:section name="language">
         <nav class="page-navigation-language">
-            <f:debug>{languageNavigation}</f:debug>
             <ul class="navigation">
                 <f:for each="{languageNavigation}" as="language">
                     <li class="item language-{language.twoLetterIsoCode}{f:if(condition:'{language.active}',then:' active')}">
