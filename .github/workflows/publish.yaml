@@ -1,6 +1,6 @@
 name: Publish on TER
 
-on: 
+on:
   release:
     types: [published]
 
@@ -11,8 +11,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: the-coding-owl/action-typo3-extension-repository-upload@0.0.1
-      env: 
+      env:
         SECRET_USERNAME: ${{ secrets.USERNAME }}
         SECRET_PASSWORD: ${{ secrets.PASSWORD }}
-        EXTENSION_KEY: 'oclock'
+        EXTENSION_KEY: 'easy_navigation'
         UPLOAD_MESSAGE: ${{ github.event.release.body }}
