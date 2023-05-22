@@ -3,11 +3,11 @@
     "description": "An extension that makes it easy to flag a TYPO3 page record as an entry point of a menu",
     "type": "typo3-cms-extension",
     "require": {
-        "typo3/cms-core": "^9.5.14 || ^10.3.0 || ^11.5.0",
-        "typo3/cms-backend": "^9.5.14 || ^10.3.0 || ^11.5.0",
-        "typo3/cms-frontend": "^9.5.14 || ^10.3.0 || ^11.5.0",
-        "typo3/cms-fluid": "^9.5.14 || ^10.3.0 || ^11.5.0",
-        "typo3/cms-fluid-styled-content": "^9.5.14 || ^10.3.0 || ^11.5.0"
+        "typo3/cms-core": "^10.4.0 || ^11.5.0 || ^12.0.0",
+        "typo3/cms-backend": "^10.4.0 || ^11.5.0 || ^12.0.0",
+        "typo3/cms-frontend": "^10.4.0 || ^11.5.0 || ^12.0.0",
+        "typo3/cms-fluid": "^10.4.0 || ^11.5.0 || ^12.0.0",
+        "typo3/cms-fluid-styled-content": "^10.4.0 || ^11.5.0 || ^12.0.0"
     },
     "license": "GPL-3.0-or-later",
     "authors": [
@@ -40,6 +40,13 @@
     "extra": {
         "typo3/cms": {
             "extension-key": "easy_navigation"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "typo3/class-alias-loader": true,
+            "typo3/cms-composer-installers": true,
+            "phpstan/extension-installer": true
         }
     }
 }
