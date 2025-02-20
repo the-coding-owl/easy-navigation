@@ -2,8 +2,8 @@ name: PSR
 
 on:
   pull_request:
-    branches: [ master ]
-    
+    branches: [ main ]
+
 jobs:
   phpcs:
     runs-on: ubuntu-latest
@@ -22,7 +22,7 @@ jobs:
           ${{ runner.os }}-build-${{ env.cache-name }}
           ${{ runner.os }}-build-
           ${{ runner.os }}-
-            
+
     - name: Composer install
       uses: php-actions/composer@v6
       with:

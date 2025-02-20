@@ -2,8 +2,8 @@ name: phpstan
 
 on:
   pull_request:
-    branches: [ master ]
-    
+    branches: [ main ]
+
 jobs:
   phpstan:
     runs-on: ubuntu-latest
